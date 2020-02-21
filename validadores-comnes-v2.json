@@ -1,0 +1,2584 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "La API de Datos Comunes proporciona a los desarrolladores un conjunto de operaciones de consulta de información de carácter general sobre los distintos dominios funcionales de Santalucía, tales como consulta de códigos de países, provincias, localidades, tipos de vía, agencias, etc.",
+    "version" : "2",
+    "title" : "Datos Comunes",
+    "contact" : {
+      "name" : "Arquitectura Middleware",
+      "url" : "https://app.swaggerhub.com/apis/santalucia/DatosComunes/2",
+      "email" : "apis@santalucia.es"
+    },
+    "x-dominio" : "Gadgets",
+    "x-desc-dominio" : {
+      "schema" : {
+        "$ref" : "#/definitions/desc-dominio"
+      }
+    }
+  },
+  "host" : "apis.santalucia.es",
+  "basePath" : "/datos-comunes/v2",
+  "tags" : [ {
+    "name" : "DatosComunes",
+    "description" : "Operaciones de propósito general."
+  } ],
+  "security" : [ {
+    "oauth" : [ ]
+  } ],
+  "paths" : {
+    "/paises" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Listado Paises",
+        "description" : "Devuelve todos los paises existentes acorde al criterio de busqueda.",
+        "operationId" : "getPaises",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "inicio",
+          "in" : "query",
+          "description" : "Índice a partir del cual obtener un conjunto paginado de recursos.",
+          "required" : false,
+          "type" : "integer",
+          "minimum" : 0,
+          "format" : "int32"
+        }, {
+          "name" : "limite",
+          "in" : "query",
+          "description" : "Número máximo de recursos por página.",
+          "required" : false,
+          "type" : "integer",
+          "maximum" : 50,
+          "minimum" : 25,
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Paises que cumplen el criterio de busqueda",
+            "schema" : {
+              "$ref" : "#/definitions/paises"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    },
+    "/paises/{pais}" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Detalle Pais",
+        "description" : "Devuelve los datos del pais indicado.",
+        "operationId" : "getPais",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "pais",
+          "in" : "path",
+          "description" : "Pais solicitado.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Datos del pais solicitado",
+            "schema" : {
+              "$ref" : "#/definitions/pais"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    },
+    "/provincias" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Listado Provincias",
+        "description" : "Devuelve todas las provincias existentes acorde al criterio de busqueda.\n",
+        "operationId" : "getProvincias",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "inicio",
+          "in" : "query",
+          "description" : "Índice a partir del cual obtener un conjunto paginado de recursos.",
+          "required" : false,
+          "type" : "integer",
+          "minimum" : 0,
+          "format" : "int32"
+        }, {
+          "name" : "limite",
+          "in" : "query",
+          "description" : "Número máximo de recursos por página.",
+          "required" : false,
+          "type" : "integer",
+          "maximum" : 50,
+          "minimum" : 25,
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Provincias que cumplen el criterio de busqueda",
+            "schema" : {
+              "$ref" : "#/definitions/provincias"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth" : [ ]
+        } ]
+      }
+    },
+    "/provincias/{provincia}" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Detalle Provincia",
+        "description" : "Obtiene los datos de la Provincia indicada",
+        "operationId" : "getProvincia",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "provincia",
+          "in" : "path",
+          "description" : "Codigo de la provincia cuyos datos se desea obtener",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Datos de la provincia indicada",
+            "schema" : {
+              "$ref" : "#/definitions/provincia"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    },
+    "/provincias/{provincia}/localidades" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Listado Localidades",
+        "description" : "Obtiene las localidades correspondientes a la Provincia indicada",
+        "operationId" : "getLocalidadesProvincia",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "inicio",
+          "in" : "query",
+          "description" : "Índice a partir del cual obtener un conjunto paginado de recursos.",
+          "required" : false,
+          "type" : "integer",
+          "minimum" : 0,
+          "format" : "int32"
+        }, {
+          "name" : "limite",
+          "in" : "query",
+          "description" : "Número máximo de recursos por página.",
+          "required" : false,
+          "type" : "integer",
+          "maximum" : 50,
+          "minimum" : 25,
+          "format" : "int32"
+        }, {
+          "name" : "provincia",
+          "in" : "path",
+          "description" : "Codigo de la provincia cuyas localidades se desea recuperar",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Localidades que cumplen el criterio de busqueda",
+            "schema" : {
+              "$ref" : "#/definitions/localidades"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    },
+    "/provincias/{provincia}/localidades/{localidad}" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Detalle Localidad",
+        "description" : "Obtiene los datos de la localidad indicada",
+        "operationId" : "getLocalidad",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "provincia",
+          "in" : "path",
+          "description" : "Codigo de la provincia cuyas localidades se desea recuperar",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "localidad",
+          "in" : "path",
+          "description" : "Codigo de la localidad cuyos datos se desea recuperar",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Localidad que cumplen el criterio de busqueda",
+            "schema" : {
+              "$ref" : "#/definitions/localidad"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    },
+    "/localidades-ine" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Listado Localidades INE",
+        "description" : "Devuelve las poblaciones INE (Instituto Nacional de Estadisticas) a partir de un código postal",
+        "parameters" : [ {
+          "name" : "codigoPostal",
+          "in" : "query",
+          "description" : "Código postal",
+          "required" : true,
+          "type" : "integer",
+          "maximum" : 99999,
+          "format" : "int32",
+          "x-example" : 28042
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Datos de las localidades obtenidas",
+            "schema" : {
+              "$ref" : "#/definitions/localidadesINE"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    },
+    "/tipos-via" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Listado Tipos Via",
+        "description" : "Devuelve todas los tipos de via existentes acorde al criterio de busqueda\n",
+        "operationId" : "getTiposVia",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "inicio",
+          "in" : "query",
+          "description" : "Índice a partir del cual obtener un conjunto paginado de recursos.",
+          "required" : false,
+          "type" : "integer",
+          "minimum" : 0,
+          "format" : "int32"
+        }, {
+          "name" : "limite",
+          "in" : "query",
+          "description" : "Número máximo de recursos por página.",
+          "required" : false,
+          "type" : "integer",
+          "maximum" : 50,
+          "minimum" : 25,
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Tipos de via que cumplen el criterio de busqueda",
+            "schema" : {
+              "$ref" : "#/definitions/tipos-via"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    },
+    "/agencias" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Listado Agencias",
+        "description" : "Devuelve los datos de las Agencias de Santalucia que cumplan con los criterios de busqueda indicados.",
+        "operationId" : "getAgencias",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "inicio",
+          "in" : "query",
+          "description" : "Índice a partir del cual obtener un conjunto paginado de recursos.",
+          "required" : false,
+          "type" : "integer",
+          "minimum" : 0,
+          "format" : "int32"
+        }, {
+          "name" : "limite",
+          "in" : "query",
+          "description" : "Número máximo de recursos por página.",
+          "required" : false,
+          "type" : "integer",
+          "maximum" : 50,
+          "minimum" : 25,
+          "format" : "int32"
+        }, {
+          "name" : "provincia",
+          "in" : "query",
+          "description" : "Restringe la busqueda a agencias de la provincia indicada",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "localidad",
+          "in" : "query",
+          "description" : "Restringe la busqueda a agencias de la localidad indicada",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Agencias que cumplen el criterio de busqueda",
+            "schema" : {
+              "$ref" : "#/definitions/agencias"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    },
+    "/agenocoords" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Listado Agencias Coordenadas",
+        "description" : "Devuelve los datos de las Agencias de Santalucia que cumplan con los criterios de busqueda indicados.",
+        "operationId" : "getAgenciasNoCoords",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "inicio",
+          "in" : "query",
+          "description" : "Índice a partir del cual obtener un conjunto paginado de recursos.",
+          "required" : false,
+          "type" : "integer",
+          "minimum" : 0,
+          "format" : "int32"
+        }, {
+          "name" : "limite",
+          "in" : "query",
+          "description" : "Número máximo de recursos por página.",
+          "required" : false,
+          "type" : "integer",
+          "maximum" : 50,
+          "minimum" : 25,
+          "format" : "int32"
+        }, {
+          "name" : "provincia",
+          "in" : "query",
+          "description" : "Restringe la busqueda a agencias de la provincia indicada",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "localidad",
+          "in" : "query",
+          "description" : "Restringe la busqueda a agencias de la localidad indicada",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Agencias que cumplen el criterio de busqueda",
+            "schema" : {
+              "$ref" : "#/definitions/agenocoords"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    },
+    "/grupos-actividades" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Listado Grupos Actividades",
+        "description" : "Devuelve todlos grupos de actividades existentes acorde al criterio de busqueda.",
+        "operationId" : "getGruposActividades",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "inicio",
+          "in" : "query",
+          "description" : "Índice a partir del cual obtener un conjunto paginado de recursos.",
+          "required" : false,
+          "type" : "integer",
+          "minimum" : 0,
+          "format" : "int32"
+        }, {
+          "name" : "limite",
+          "in" : "query",
+          "description" : "Número máximo de recursos por página.",
+          "required" : false,
+          "type" : "integer",
+          "maximum" : 50,
+          "minimum" : 25,
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Grupos de actividades que cumplen el criterio de busqueda",
+            "schema" : {
+              "$ref" : "#/definitions/gruposActividades"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    },
+    "/grupos-actividades/{grupo}" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Detalle Grupo Actividad",
+        "description" : "Obtiene los datos del grupo de actividades indicado",
+        "operationId" : "getGrupo",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "grupo",
+          "in" : "path",
+          "description" : "Codigo l grupo de actividades cuyos datos se desea obtener",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Datos del grupo de actividades indicado",
+            "schema" : {
+              "$ref" : "#/definitions/grupoActividad"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    },
+    "/grupos-actividades/{grupo}/actividades-profesionales" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Listado Actividades Profesionales",
+        "description" : "Obtiene las actividades profesionales correspondientes al grupo de actividades indicado",
+        "operationId" : "getActividadesProfesionalesGrupo",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "inicio",
+          "in" : "query",
+          "description" : "Índice a partir del cual obtener un conjunto paginado de recursos.",
+          "required" : false,
+          "type" : "integer",
+          "minimum" : 0,
+          "format" : "int32"
+        }, {
+          "name" : "limite",
+          "in" : "query",
+          "description" : "Número máximo de recursos por página.",
+          "required" : false,
+          "type" : "integer",
+          "maximum" : 50,
+          "minimum" : 25,
+          "format" : "int32"
+        }, {
+          "name" : "grupo",
+          "in" : "path",
+          "description" : "Codigo del grupo de actividades cuyas actividades profesionales se desea recuperar",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Actividades profesonales que cumplen el criterio de busqueda",
+            "schema" : {
+              "$ref" : "#/definitions/actividadesProfesionales"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    },
+    "/grupos-actividades/{grupo}/actividades-profesionales/{actividad}" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Detalle Actividad Profesional",
+        "description" : "Obtiene los datos de la actividad profesional indicada",
+        "operationId" : "getActividadProfesional",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "grupo",
+          "in" : "path",
+          "description" : "Codigo del grupo de actividades cuyas actividades profesionales se desea recuperar",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "actividad",
+          "in" : "path",
+          "description" : "Codigo de la actividad profesional cuyos datos se desea recuperar",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Actividad profesional que cumple el criterio de busqueda",
+            "schema" : {
+              "$ref" : "#/definitions/actividadProfesional"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    },
+    "/medios-pago" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Listado Medios Pago",
+        "description" : "Devuelve una lista con los datos de todos los medios de pago ofrecidos",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Lista con los datos de todos los medios de pago ofrecidos",
+            "schema" : {
+              "$ref" : "#/definitions/medios-pago"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    },
+    "/medios-pago/{medio}" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Detalles Medio Pago",
+        "description" : "Devuelve los datos de un determinado medio de pago",
+        "parameters" : [ {
+          "name" : "medio",
+          "in" : "path",
+          "description" : "Código del medio de pago",
+          "required" : true,
+          "type" : "string",
+          "maxLength" : 2,
+          "x-example" : "B",
+          "enum" : [ "A", "B", "C", "G", "L", "M", "N", "O", "R", "T" ]
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Datos del medio de pago solicitado",
+            "schema" : {
+              "$ref" : "#/definitions/medio-pago"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    },
+    "/beneficiarios" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Listado Beneficiarios",
+        "description" : "Devuelve una lista con los datos de todos los beneficiarios",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Lista con los datos de todos los beneficiarios",
+            "schema" : {
+              "$ref" : "#/definitions/beneficiarios"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    },
+    "/beneficiarios/{beneficiario}" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Detalle Beneficiario",
+        "description" : "Devuelve los datos de un determinado beneficiario",
+        "parameters" : [ {
+          "name" : "beneficiario",
+          "in" : "path",
+          "description" : "Código del beneficiario",
+          "required" : true,
+          "type" : "integer",
+          "maximum" : 999,
+          "format" : "int32",
+          "x-example" : 19
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Datos del beneficiario solicitado",
+            "schema" : {
+              "$ref" : "#/definitions/beneficiario"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    },
+    "/especies-animales" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Listado Especies Animales",
+        "description" : "Devuelve una lista con los datos de todas las especies animales",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Lista con los datos de todas las especies animales",
+            "schema" : {
+              "$ref" : "#/definitions/especies-animales"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    },
+    "/especies-animales/{especie}" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Detalle Especie Animal",
+        "description" : "Devuelve los datos de una determinada especie animal",
+        "parameters" : [ {
+          "name" : "especie",
+          "in" : "path",
+          "description" : "Código de la especie animal",
+          "required" : true,
+          "type" : "string",
+          "maxLength" : 2,
+          "x-example" : "P",
+          "enum" : [ "G", "P" ]
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Datos de la especie animal solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/especie-animal"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    },
+    "/especies-animales/{especie}/razas" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Listado Razas Animales",
+        "description" : "Devuelve una lista con los datos de todas las razas animales de una determinada especie",
+        "parameters" : [ {
+          "name" : "especie",
+          "in" : "path",
+          "description" : "Código de la especie animal",
+          "required" : true,
+          "type" : "string",
+          "maxLength" : 2,
+          "x-example" : "P",
+          "enum" : [ "G", "P" ]
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Lista con los datos de todas las razas animales de una determinada especie",
+            "schema" : {
+              "$ref" : "#/definitions/razas"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    },
+    "/especies-animales/{especie}/razas/{raza}" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Detalle Raza Animal",
+        "description" : "Devuelve los datos de una determinada raza animal",
+        "parameters" : [ {
+          "name" : "especie",
+          "in" : "path",
+          "description" : "Código de la especie animal",
+          "required" : true,
+          "type" : "string",
+          "maxLength" : 2,
+          "x-example" : "P",
+          "enum" : [ "G", "P" ]
+        }, {
+          "name" : "raza",
+          "in" : "path",
+          "description" : "Código de la raza animal",
+          "required" : true,
+          "type" : "string",
+          "maxLength" : 5,
+          "x-example" : "STAFI"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Datos de la raza animal solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/raza"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    },
+    "/tipos-documento-identificacion" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Listado Tipos Documentos Identificacion",
+        "description" : "Devuelve una lista con los tipos de documentos de identificación",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Lista con los datos de todos los tipos de documentos de  identificación",
+            "schema" : {
+              "$ref" : "#/definitions/tipos-documento-identificacion"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    },
+    "/tipos-documento-identificacion/{tipo}" : {
+      "get" : {
+        "tags" : [ "DatosComunes" ],
+        "summary" : "Detalle Tipo Documento Identificacion",
+        "description" : "Devuelve los datos de un determinado tipo de documento de identificación",
+        "parameters" : [ {
+          "name" : "tipo",
+          "in" : "path",
+          "description" : "Código del tipo de documento de identificación",
+          "required" : true,
+          "type" : "string",
+          "maxLength" : 2,
+          "x-example" : "N",
+          "enum" : [ "C", "D", "E", "N", "P", "T" ]
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Datos del tipo de documento de identificación solicitado",
+            "schema" : {
+              "$ref" : "#/definitions/tipo-documento-identificacion"
+            }
+          },
+          "400" : {
+            "description" : "La solicitud contiene sintaxis errónea o datos incorrectos",
+            "schema" : {
+              "$ref" : "#/definitions/error_400"
+            }
+          },
+          "401" : {
+            "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+            "schema" : {
+              "$ref" : "#/definitions/error_401"
+            }
+          },
+          "403" : {
+            "description" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+            "schema" : {
+              "$ref" : "#/definitions/error_403"
+            }
+          },
+          "404" : {
+            "description" : "No se han encontrado coincidencias",
+            "schema" : {
+              "$ref" : "#/definitions/error_404"
+            }
+          },
+          "429" : {
+            "description" : "Se ha excedido el límite de solicitudes permitidas",
+            "schema" : {
+              "$ref" : "#/definitions/error_429"
+            }
+          },
+          "500" : {
+            "description" : "Error interno en el servidor",
+            "schema" : {
+              "$ref" : "#/definitions/error_500"
+            }
+          },
+          "502" : {
+            "description" : "Bad Gateway",
+            "schema" : {
+              "$ref" : "#/definitions/error_502"
+            }
+          },
+          "503" : {
+            "description" : "Servicio no disponible",
+            "schema" : {
+              "$ref" : "#/definitions/error_503"
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "oauth" : {
+      "type" : "oauth2",
+      "tokenUrl" : "https://sso-sldev.santalucia.es/auth/realms/3scale/protocol/openid-connect/token",
+      "flow" : "application",
+      "scopes" : {
+        "r:direccionamiento" : "Permiso de lectura sobre servicios de datos comunes"
+      }
+    }
+  },
+  "definitions" : {
+    "tipos-via" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/tipoVia"
+      }
+    },
+    "tipos-documento-identificacion" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/tipo-documento-identificacion"
+      }
+    },
+    "localidades" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/localidad"
+      }
+    },
+    "provincias" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/provincia"
+      }
+    },
+    "paises" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/pais"
+      }
+    },
+    "medios-pago" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/medio-pago"
+      }
+    },
+    "localidadesINE" : {
+      "type" : "array",
+      "description" : "LIstado de localidades",
+      "items" : {
+        "$ref" : "#/definitions/localidadINE"
+      }
+    },
+    "actividadesProfesionales" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/actividadProfesional"
+      }
+    },
+    "gruposActividades" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/grupoActividad"
+      }
+    },
+    "razas" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/raza"
+      }
+    },
+    "especies-animales" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/especie-animal"
+      }
+    },
+    "beneficiarios" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/beneficiario"
+      }
+    },
+    "agenocoords" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/agenciaNoCoords"
+      }
+    },
+    "agencias" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/agencia"
+      }
+    },
+    "errores_400" : {
+      "type" : "array",
+      "description" : "Respuesta de Error",
+      "items" : {
+        "$ref" : "#/definitions/error_400"
+      }
+    },
+    "desc-dominio" : {
+      "type" : "string",
+      "description" : "Te ofrecemos un conjunto de utilidades que te ayudarán a integrarte con el resto de nuestras APIs y procesos de negocio tales como consulta de códigos de localidades, normalizador de direcciones, envío de notificaciones (email, push, sms), pasarela de pagos, firma digital, etc."
+    },
+    "error_400" : {
+      "type" : "object",
+      "required" : [ "mensaje", "tipo" ],
+      "properties" : {
+        "tipo" : {
+          "type" : "string",
+          "example" : "Bad Request",
+          "description" : "Bad Request"
+        },
+        "mensaje" : {
+          "type" : "string",
+          "example" : "Valor no permitido",
+          "description" : "Valor no permitido"
+        }
+      },
+      "description" : "Datos del error"
+    },
+    "error_401" : {
+      "type" : "object",
+      "required" : [ "mensaje", "tipo" ],
+      "properties" : {
+        "tipo" : {
+          "type" : "string",
+          "example" : "autenticacion",
+          "description" : "Error de autenticación"
+        },
+        "mensaje" : {
+          "type" : "string",
+          "example" : "Solicitud no autenticada debido a un token ausente, no válido o caducado",
+          "description" : "Solicitud no autenticada debido a un token ausente, no válido o caducado"
+        }
+      },
+      "description" : "Datos del error"
+    },
+    "error_403" : {
+      "type" : "object",
+      "required" : [ "mensaje", "tipo" ],
+      "properties" : {
+        "tipo" : {
+          "type" : "string",
+          "description" : "Prohibido"
+        },
+        "mensaje" : {
+          "type" : "string",
+          "example" : "Credenciales no correctas para poder ejecutar la operación solicitada",
+          "description" : "Credenciales no correctas para poder ejecutar la operación solicitada"
+        }
+      },
+      "description" : "Credenciales no correctas para poder ejecutar la operación solicitada"
+    },
+    "error_404" : {
+      "type" : "object",
+      "required" : [ "mensaje", "tipo" ],
+      "properties" : {
+        "tipo" : {
+          "type" : "string",
+          "description" : "No encontrado"
+        },
+        "mensaje" : {
+          "type" : "string",
+          "example" : "No se han encontrado coincidencias.",
+          "description" : "No se han encontrado coincidencias."
+        }
+      },
+      "description" : "No encontrado"
+    },
+    "error_429" : {
+      "type" : "object",
+      "required" : [ "mensaje", "tipo" ],
+      "properties" : {
+        "tipo" : {
+          "type" : "string",
+          "description" : "Límite excedido"
+        },
+        "mensaje" : {
+          "type" : "string",
+          "example" : "Se ha excedido el límite de solicitudes permitidas.",
+          "description" : "Se ha excedido el límite de solicitudes permitidas."
+        }
+      },
+      "description" : "Demasiadas solicitudes"
+    },
+    "error_500" : {
+      "type" : "object",
+      "required" : [ "mensaje", "tipo" ],
+      "properties" : {
+        "tipo" : {
+          "type" : "string",
+          "example" : "internoServidor",
+          "description" : "Indicador del tipo de error. Pueden ser por formato erróneo de los datos, por validación de datos de Negocio, por credenciales incorrectas, por error interno"
+        },
+        "mensaje" : {
+          "type" : "string",
+          "example" : "Error interno del servidor",
+          "description" : "Descripción del error"
+        }
+      },
+      "description" : "Datos del error"
+    },
+    "error_502" : {
+      "type" : "object",
+      "required" : [ "mensaje", "tipo" ],
+      "properties" : {
+        "tipo" : {
+          "type" : "string",
+          "description" : "Bad Gateway"
+        },
+        "mensaje" : {
+          "type" : "string",
+          "example" : "El servidor, mientras actuaba como puerta de enlace o proxy, recibió un mensaje no válido, por lo que no puede responder adecuadamente a la petición",
+          "description" : "El servidor, mientras actuaba como puerta de enlace o proxy, recibió un mensaje no válido, por lo que no puede responder adecuadamente a la petición"
+        }
+      },
+      "description" : "Bad Gateway"
+    },
+    "error_503" : {
+      "type" : "object",
+      "required" : [ "mensaje", "tipo" ],
+      "properties" : {
+        "tipo" : {
+          "type" : "string",
+          "description" : "Servicio no disponible"
+        },
+        "mensaje" : {
+          "type" : "string",
+          "example" : "El servidor no puede responder a la petición del navegador porque está congestionado o está realizando tareas de mantenimiento",
+          "description" : "El servidor no puede responder a la petición del navegador porque está congestionado o está realizando tareas de mantenimiento"
+        }
+      },
+      "description" : "Servicio no disponible"
+    },
+    "pais" : {
+      "type" : "object",
+      "required" : [ "codigo", "descripcion" ],
+      "properties" : {
+        "codigo" : {
+          "type" : "string",
+          "example" : "ES",
+          "description" : "Codigo asociado al pais"
+        },
+        "descripcion" : {
+          "type" : "string",
+          "example" : "España",
+          "description" : "Nombre del pais"
+        }
+      }
+    },
+    "provincia" : {
+      "type" : "object",
+      "required" : [ "codigo", "descripcion" ],
+      "properties" : {
+        "codigo" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : 28,
+          "description" : "Codigo de la provincia"
+        },
+        "descripcion" : {
+          "type" : "string",
+          "example" : "Madrid",
+          "description" : "Nombre de la provincia"
+        }
+      }
+    },
+    "localidad" : {
+      "type" : "object",
+      "required" : [ "codigo", "nombre" ],
+      "properties" : {
+        "codigo" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : 0,
+          "description" : "Codigo de la localidad"
+        },
+        "nombre" : {
+          "type" : "string",
+          "example" : "Madrid",
+          "description" : "Nombre de la localidad"
+        }
+      }
+    },
+    "grupoActividad" : {
+      "type" : "object",
+      "required" : [ "codigo", "descripcion" ],
+      "properties" : {
+        "codigo" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : 10,
+          "description" : "Codigo del grupo de actividad"
+        },
+        "descripcion" : {
+          "type" : "string",
+          "example" : "Actividades Deportivas",
+          "description" : "Nombre del grupo de actividad"
+        }
+      }
+    },
+    "actividadProfesional" : {
+      "type" : "object",
+      "required" : [ "codigo", "descripcion" ],
+      "properties" : {
+        "codigo" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : 124,
+          "description" : "Codigo de la actividad profesional"
+        },
+        "descripcion" : {
+          "type" : "string",
+          "example" : "Ciclismo",
+          "description" : "Nombre de la actividad profesional"
+        }
+      }
+    },
+    "medio-pago" : {
+      "type" : "object",
+      "required" : [ "codigo", "descripcion" ],
+      "properties" : {
+        "codigo" : {
+          "type" : "string",
+          "example" : "B",
+          "description" : "Código del medio de pago",
+          "maxLength" : 2,
+          "enum" : [ "A", "B", "C", "G", "L", "M", "N", "O", "R", "T" ]
+        },
+        "descripcion" : {
+          "type" : "string",
+          "example" : "Cobro Bancario",
+          "description" : "Descripción del medio de pago",
+          "maxLength" : 40
+        }
+      },
+      "description" : "Datos relativos a un medio de pago"
+    },
+    "beneficiario" : {
+      "type" : "object",
+      "required" : [ "codigo", "descripcion" ],
+      "properties" : {
+        "codigo" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : 19,
+          "description" : "Código beneficiario",
+          "maximum" : 999
+        },
+        "descripcion" : {
+          "type" : "string",
+          "example" : "Los herederos legales de ambos Asegurados",
+          "description" : "Descripción beneficiario",
+          "maxLength" : 255
+        }
+      },
+      "description" : "Datos relativos a un beneficiario"
+    },
+    "especie-animal" : {
+      "type" : "object",
+      "required" : [ "codigo", "descripcion" ],
+      "properties" : {
+        "codigo" : {
+          "type" : "string",
+          "example" : "P",
+          "description" : "Código de la especie animal",
+          "maxLength" : 2,
+          "enum" : [ "G", "P" ]
+        },
+        "descripcion" : {
+          "type" : "string",
+          "example" : "Perro",
+          "description" : "Descripción de la especie animal",
+          "maxLength" : 40
+        }
+      },
+      "description" : "Datos relativos a una especie animal"
+    },
+    "raza" : {
+      "type" : "object",
+      "required" : [ "codigo", "descripcion" ],
+      "properties" : {
+        "codigo" : {
+          "type" : "string",
+          "example" : "STAFI",
+          "description" : "Código de la raza animal",
+          "maxLength" : 5
+        },
+        "descripcion" : {
+          "type" : "string",
+          "example" : "Stafford Inglés",
+          "description" : "Descripción de la raza animal",
+          "maxLength" : 40
+        }
+      },
+      "description" : "Datos relativos a una raza animal"
+    },
+    "tipo-documento-identificacion" : {
+      "type" : "object",
+      "required" : [ "descripcion", "tipo" ],
+      "properties" : {
+        "tipo" : {
+          "type" : "string",
+          "example" : "N",
+          "description" : "Tipo documento de identificación",
+          "maxLength" : 2,
+          "enum" : [ "C", "D", "E", "N", "P", "T" ]
+        },
+        "descripcion" : {
+          "type" : "string",
+          "example" : "N.I.F",
+          "description" : "Descripción documento de identificación",
+          "maxLength" : 40
+        }
+      },
+      "description" : "Datos relativos a un tipo de documento de identificación"
+    },
+    "tipoVia" : {
+      "type" : "object",
+      "required" : [ "codigo", "descripcion" ],
+      "properties" : {
+        "codigo" : {
+          "type" : "string",
+          "example" : "CL",
+          "description" : "Codigo asociado al tipo de via"
+        },
+        "descripcion" : {
+          "type" : "string",
+          "example" : "Calle",
+          "description" : "Nombre del tipo de via"
+        }
+      }
+    },
+    "localidadINE" : {
+      "type" : "object",
+      "properties" : {
+        "localidad" : {
+          "$ref" : "#/definitions/localidad"
+        },
+        "nucleosPoblacionales" : {
+          "$ref" : "#/definitions/nucleosPoblacionales"
+        },
+        "municipio" : {
+          "$ref" : "#/definitions/municipioINE"
+        },
+        "provincia" : {
+          "$ref" : "#/definitions/provincia"
+        }
+      }
+    },
+    "nucleosPoblacionales" : {
+      "type" : "array",
+      "description" : "listado entidades singulares, colectivas, nucleos diseminados",
+      "items" : {
+        "$ref" : "#/definitions/nucleosPoblacionales_inner"
+      }
+    },
+    "municipioINE" : {
+      "type" : "object",
+      "required" : [ "codigo", "descripcion" ],
+      "properties" : {
+        "codigo" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : 28,
+          "description" : "Codigo del municipioINE"
+        },
+        "descripcion" : {
+          "type" : "string",
+          "example" : "Madrid",
+          "description" : "Nombre del municipio"
+        }
+      }
+    },
+    "agenciaNoCoords" : {
+      "type" : "object",
+      "required" : [ "codigo", "nombre" ],
+      "properties" : {
+        "codigo" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : 183,
+          "description" : "Código de la agencia",
+          "maximum" : 999
+        },
+        "nombre" : {
+          "type" : "string",
+          "example" : "Madrid - Moratalaz",
+          "description" : "Nombre de la agencia",
+          "maxLength" : 40
+        },
+        "direccion" : {
+          "$ref" : "#/definitions/agenciaNoCoords_direccion"
+        },
+        "telefono" : {
+          "type" : "string",
+          "example" : "914423939",
+          "description" : "Teléfono de la agencia",
+          "maxLength" : 15
+        },
+        "email" : {
+          "type" : "string",
+          "example" : "agencia681@agencia.santalucia.es",
+          "description" : "Correo electrónico de contacto de la agencia",
+          "maxLength" : 255
+        }
+      },
+      "description" : "Datos relativos a una agencia"
+    },
+    "agencia" : {
+      "type" : "object",
+      "required" : [ "codigo", "nombre" ],
+      "properties" : {
+        "codigo" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : 183,
+          "description" : "Código de la agencia",
+          "maximum" : 999
+        },
+        "nombre" : {
+          "type" : "string",
+          "example" : "Madrid - Moratalaz",
+          "description" : "Nombre de la agencia",
+          "maxLength" : 40
+        },
+        "direccion" : {
+          "$ref" : "#/definitions/agencia_direccion"
+        },
+        "telefono" : {
+          "type" : "string",
+          "example" : "914423939",
+          "description" : "Teléfono de la agencia",
+          "maxLength" : 15
+        },
+        "email" : {
+          "type" : "string",
+          "example" : "agencia681@agencia.santalucia.es",
+          "description" : "Correo electrónico de contacto de la agencia",
+          "maxLength" : 255
+        }
+      },
+      "description" : "Datos relativos a una agencia"
+    },
+    "gadgets" : {
+      "type" : "string",
+      "description" : "Te ofrecemos un conjunto de utilidades que te ayudarán a integrarte con el resto de nuestras APIs y procesos de negocio tales como consulta de códigos de localidades, normalizador de direcciones, envío de notificaciones (email, push, sms), pasarela de pagos, firma digital, etc."
+    },
+    "nucleosPoblacionales_inner" : {
+      "type" : "object",
+      "properties" : {
+        "entidadColectivaINE" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : 0,
+          "description" : "Código entidad colectiva INE"
+        },
+        "entidadSingularINE" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : 1,
+          "description" : "Código entidad singular INE"
+        },
+        "nucleoPoblacionDiseminadoINE" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : 1,
+          "description" : "Código nucleo población diseminado INE."
+        }
+      }
+    },
+    "agenciaNoCoords_direccion" : {
+      "type" : "object",
+      "required" : [ "nombeVia", "numero" ],
+      "properties" : {
+        "localidad" : {
+          "$ref" : "#/definitions/localidad"
+        },
+        "provincia" : {
+          "$ref" : "#/definitions/provincia"
+        },
+        "codigoPostal" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : 28033,
+          "description" : "Código postal de la agencia",
+          "maximum" : 99999
+        },
+        "via" : {
+          "type" : "string",
+          "example" : "Calle",
+          "description" : "Nombre del tipo de vía de la agencia",
+          "maxLength" : 20
+        },
+        "nombeVia" : {
+          "type" : "string",
+          "example" : "Alcala",
+          "description" : "Nombre de la vía",
+          "maxLength" : 40
+        },
+        "numero" : {
+          "type" : "string",
+          "example" : "1",
+          "description" : "Número de la vía",
+          "maxLength" : 9999
+        },
+        "complemento" : {
+          "type" : "string",
+          "example" : "izquierda",
+          "description" : "Complemento de la dirección de la agencia",
+          "maxLength" : 12
+        }
+      },
+      "description" : "Dirección de la agencia"
+    },
+    "agencia_direccion_coordenadas" : {
+      "type" : "object",
+      "properties" : {
+        "x" : {
+          "type" : "number",
+          "format" : "double",
+          "example" : 40.46,
+          "description" : "Coordenada de longitud"
+        },
+        "y" : {
+          "type" : "number",
+          "example" : -3.62,
+          "description" : "Coordenada de latitud"
+        }
+      },
+      "description" : "Coordenadas geográficas de la agencia"
+    },
+    "agencia_direccion" : {
+      "type" : "object",
+      "required" : [ "nombreVia", "numero" ],
+      "properties" : {
+        "localidad" : {
+          "$ref" : "#/definitions/localidad"
+        },
+        "provincia" : {
+          "$ref" : "#/definitions/provincia"
+        },
+        "codigoPostal" : {
+          "type" : "integer",
+          "format" : "int32",
+          "example" : 28033,
+          "description" : "Código postal de la agencia",
+          "maximum" : 99999
+        },
+        "via" : {
+          "type" : "string",
+          "example" : "Calle",
+          "description" : "Nombre del tipo de vía de la agencia",
+          "maxLength" : 20
+        },
+        "nombreVia" : {
+          "type" : "string",
+          "example" : "Alcala",
+          "description" : "Nombre de la vía",
+          "maxLength" : 40
+        },
+        "numero" : {
+          "type" : "string",
+          "example" : "1",
+          "description" : "Número de la vía",
+          "maxLength" : 9999
+        },
+        "complemento" : {
+          "type" : "string",
+          "example" : "izquierda",
+          "description" : "Complemento de la dirección de la agencia",
+          "maxLength" : 12
+        },
+        "coordenadas" : {
+          "$ref" : "#/definitions/agencia_direccion_coordenadas"
+        }
+      },
+      "description" : "Dirección de la agencia"
+    }
+  },
+  "responses" : {
+    "RespuestaErrorPorDefecto" : {
+      "description" : "Información del error.",
+      "schema" : {
+        "$ref" : "https://api.swaggerhub.com/domains/santalucia/ams-componentes-web-api/1.0#/definitions/Error"
+      }
+    }
+  }
+}
